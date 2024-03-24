@@ -10,7 +10,6 @@ const OnThisDay = () => {
     const url = `https://api.wikimedia.org/feed/v1/wikipedia/en/onthisday/all/${month}/${day}`;
     const headers = {
       Authorization: `${process.env.REACT_APP_ACCESS_TOKEN}`,
-      "Api-User-Agent": "OnThisDay (a@a.com)",
     };
 
     try {
