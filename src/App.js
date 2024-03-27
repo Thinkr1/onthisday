@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "./onthisday.css"
+import "./onthisday.css";
 
 const OnThisDay = () => {
   const [day, setDay] = useState("");
@@ -24,19 +24,21 @@ const OnThisDay = () => {
 
   return (
     <div>
-      <input
-        value={day}
-        onChange={(e) => setDay(e.target.value)}
-        type="number"
-        placeholder="Day"
-      />
-      <input
-        value={month}
-        onChange={(e) => setMonth(e.target.value)}
-        type="number"
-        placeholder="Month"
-      />
-      <button onClick={handleSubmit}>Submit</button>
+      <div className="form-container">
+        <input
+          value={day}
+          onChange={(e) => setDay(e.target.value)}
+          type="number"
+          placeholder="Day"
+        />
+        <input
+          value={month}
+          onChange={(e) => setMonth(e.target.value)}
+          type="number"
+          placeholder="Month"
+        />
+        <button onClick={handleSubmit}>Submit</button>
+      </div>
       <div id="events">
         <table className="event-table">
           <thead>
