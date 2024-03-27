@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "./onthisday.css"
 
 const OnThisDay = () => {
   const [day, setDay] = useState("");
@@ -37,9 +38,20 @@ const OnThisDay = () => {
       />
       <button onClick={handleSubmit}>Submit</button>
       <div id="events">
-        {events.map((event, index) => (
-          <div key={index}>{event.text}</div>
-        ))}
+        <table className="event-table">
+          <thead>
+            <tr>
+              <th>Events</th>
+            </tr>
+          </thead>
+          <tbody>
+            {events.map((event, index) => (
+              <tr key={index}>
+                <td>{event.text}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );
