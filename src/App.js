@@ -6,19 +6,25 @@ const OnThisDay = () => {
   const [day, setDay] = useState("");
   const [month, setMonth] = useState("");
   const [events, setEvents] = useState([]);
+  const [dayErr, setDayErr] = useState(false);
+  const [monthErr, setMonthErr] = useState(false);
 
   const handleSubmit = async () => {
-    const url = `https://api.wikimedia.org/feed/v1/wikipedia/en/onthisday/all/${month}/${day}`;
-    const headers = {
-      Authorization: `${process.env.REACT_APP_ACCESS_TOKEN}`,
-    };
+    if (dayErr || monthErr) {
+      return;
+    } else {
+      const url = `https://api.wikimedia.org/feed/v1/wikipedia/en/onthisday/all/${month}/${day}`;
+      const headers = {
+        Authorization: `${process.env.ACCESS_TOKEN}`,
+      };
 
-    try {
-      const response = await axios.get(url, { headers });
-      setEvents(response.data.events);
-    } catch (err) {
-      console.error(err);
-      setEvents(["Error: " + err.message]);
+      try {
+        const response = await axios.get(url, { headers });
+        setEvents(response.data.events);
+      } catch (err) {
+        console.error(err);
+        setEvents(["Error: " + err.message]);
+      }
     }
   };
 
@@ -28,14 +34,40 @@ const OnThisDay = () => {
         <input
           value={day}
           onChange={(e) => setDay(e.target.value)}
+          onBlur={() => {
+            if (day < 1 || day > 31) {
+              setDayErr(true);
+            } else {
+              setDayErr(false);
+            }
+          }}
+          style={{
+            border: dayErr ? "2px solid red" : "1px solid #ccc",
+            animation: dayErr ? "shake 0.5s" : "none",
+          }}
           type="number"
           placeholder="Day"
+          max="31"
+          min="1"
         />
         <input
           value={month}
           onChange={(e) => setMonth(e.target.value)}
+          onBlur={() => {
+            if (month < 1 || month > 12) {
+              setMonthErr(true);
+            } else {
+              setMonthErr(false);
+            }
+          }}
+          style={{
+            border: monthErr ? "2px solid red" : "1px solid #ccc",
+            animation: monthErr ? "shake 0.5s" : "none",
+          }}
           type="number"
           placeholder="Month"
+          max="12"
+          min="1"
         />
         <button onClick={handleSubmit}>Submit</button>
       </div>
