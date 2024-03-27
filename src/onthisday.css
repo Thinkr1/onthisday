@@ -126,3 +126,7 @@ button:active {
   translate: 0 1px;
 }
 
+.form-container input::-webkit-inner-spin-button,
+.form-container input::-webkit-outer-spin-button {
+  opacity: 0;
+}
