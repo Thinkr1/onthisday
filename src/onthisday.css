@@ -129,3 +129,17 @@ button:active {
 .shake {
   animation: shake 0.5s;
 }
+
+h1 {
+  text-align: center;
+  margin: 1.5rem;
+}
+
+a {
+  text-decoration: none;
+  color:rgb(9, 54, 138)
+}
+
+a:hover {
+  color:rgb(16, 84, 209)
+}
