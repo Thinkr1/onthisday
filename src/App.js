@@ -31,7 +31,7 @@ const OnThisDay = () => {
     } else {
       setMonth(monthToNumber[month.toString()]);
       setMonthErr(false);
-      console.log("Month:", month, "Day:", day);
+      // console.log("Month:", month, "Day:", day);
       const url = `https://api.wikimedia.org/feed/v1/wikipedia/en/onthisday/all/${month}/${day}`;
       const headers = {
         Authorization: `${process.env.ACCESS_TOKEN}`,
@@ -61,10 +61,11 @@ const OnThisDay = () => {
       </h1>
       <div className="form-container">
         <input
-          value={day}
+          value={day || ""}
           onChange={(e) => setDay(e.target.value)}
           onBlur={() => {
             if (day < 1 || day > 31) {
+              setDay("")
               setDayErr(true);
             } else {
               setDayErr(false);
@@ -86,7 +87,7 @@ const OnThisDay = () => {
             1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
             20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
           ].map((day) => (
-            <option key={day} value={day}>{`Day ${day}`}</option>
+            <option key={day} value={day}></option>
           ))}
         </datalist>
 
@@ -95,6 +96,7 @@ const OnThisDay = () => {
           onChange={(e) => setMonth(e.target.value)}
           onBlur={() => {
             if (month < 1 || month > 12) {
+              // setMonth("")
               setMonthErr(true);
             } else {
               setMonthErr(false);
